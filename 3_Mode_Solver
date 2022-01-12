@@ -1,0 +1,488 @@
+"Completed in Python 3.8"
+"""
+Created on Thu Nov 25 15:05:18 2021
+
+@author: adams
+"""
+
+"3 mode equation solver that outputs solutions of A field"
+
+"Imports the necessary functions"
+import numpy as np
+import scipy.integrate as sc
+import matplotlib.pyplot as plt
+
+"defining the equations"
+"10 functions defined to increase chicane slippage number m from 1 to 10"
+
+def f1(z,q):
+    
+    "Combines 9 equations into one value to return"
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m1)*A_m
+    dP = -np.conj(PI1)*A
+    dP_p = -np.conj(PI_p1)*A_p
+    
+    dA_m = (b_m*PI_m1)-i*(wbar + eps1/rho1)*A_m+((X0/2)*b*PI_m1)+((X0/2)*b_m*PI_m1)
+    dA = (b*PI1)-i*(wbar + eps1/rho1)*A+((X0/2)*b_p*PI1)+((X0/2)*b_m*PI1)
+    dA_p = (b_p*PI_p1)-i*(wbar + eps1/rho1)*A_p+((X0/2)*b*PI_p1)+((X0/2)*b_p*PI_p1)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f2(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m2)*A_m
+    dP = -np.conj(PI2)*A
+    dP_p = -np.conj(PI_p2)*A_p
+    
+    dA_m = (b_m*PI_m2)-i*(wbar + eps2/rho1)*A_m+((X0/2)*b*PI_m2)+((X0/2)*b_m*PI_m2)
+    dA = (b*PI2)-i*(wbar + eps2/rho1)*A+((X0/2)*b_p*PI2)+((X0/2)*b_m*PI2)
+    dA_p = (b_p*PI_p2)-i*(wbar + eps2/rho1)*A_p+((X0/2)*b*PI_p2)+((X0/2)*b_p*PI_p2)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f3(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m3)*A_m
+    dP = -np.conj(PI3)*A
+    dP_p = -np.conj(PI_p3)*A_p
+    
+    dA_m = (b_m*PI_m3)-i*(wbar + eps3/rho1)*A_m+((X0/2)*b*PI_m3)+((X0/2)*b_m*PI_m3)
+    dA = (b*PI3)-i*(wbar + eps3/rho1)*A+((X0/2)*b_p*PI3)+((X0/2)*b_m*PI3)
+    dA_p = (b_p*PI_p3)-i*(wbar + eps3/rho1)*A_p+((X0/2)*b*PI_p3)+((X0/2)*b_p*PI_p3)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f4(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m4)*A_m
+    dP = -np.conj(PI4)*A
+    dP_p = -np.conj(PI_p4)*A_p
+    
+    dA_m = (b_m*PI_m4)-i*(wbar + eps4/rho1)*A_m+((X0/2)*b*PI_m4)+((X0/2)*b_m*PI_m4)
+    dA = (b*PI4)-i*(wbar + eps4/rho1)*A+((X0/2)*b_p*PI4)+((X0/2)*b_m*PI4)
+    dA_p = (b_p*PI_p4)-i*(wbar + eps4/rho1)*A_p+((X0/2)*b*PI_p4)+((X0/2)*b_p*PI_p4)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f5(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m5)*A_m
+    dP = -np.conj(PI5)*A
+    dP_p = -np.conj(PI_p5)*A_p
+    
+    dA_m = (b_m*PI_m5)-i*(wbar + eps5/rho1)*A_m+((X0/2)*b*PI_m5)+((X0/2)*b_m*PI_m5)
+    dA = (b*PI5)-i*(wbar + eps5/rho1)*A+((X0/2)*b_p*PI5)+((X0/2)*b_m*PI5)
+    dA_p = (b_p*PI_p5)-i*(wbar + eps5/rho1)*A_p+((X0/2)*b*PI_p5)+((X0/2)*b_p*PI_p5)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f6(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m6)*A_m
+    dP = -np.conj(PI6)*A
+    dP_p = -np.conj(PI_p6)*A_p
+    
+    dA_m = (b_m*PI_m6)-i*(wbar + eps6/rho1)*A_m+((X0/2)*b*PI_m6)+((X0/2)*b_m*PI_m6)
+    dA = (b*PI6)-i*(wbar + eps6/rho1)*A+((X0/2)*b_p*PI6)+((X0/2)*b_m*PI6)
+    dA_p = (b_p*PI_p6)-i*(wbar + eps6/rho1)*A_p+((X0/2)*b*PI_p6)+((X0/2)*b_p*PI_p6)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f7(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m7)*A_m
+    dP = -np.conj(PI7)*A
+    dP_p = -np.conj(PI_p7)*A_p
+    
+    dA_m = (b_m*PI_m7)-i*(wbar + eps7/rho1)*A_m+((X0/2)*b*PI_m7)+((X0/2)*b_m*PI_m7)
+    dA = (b*PI7)-i*(wbar + eps7/rho1)*A+((X0/2)*b_p*PI7)+((X0/2)*b_m*PI7)
+    dA_p = (b_p*PI_p7)-i*(wbar + eps7/rho1)*A_p+((X0/2)*b*PI_p7)+((X0/2)*b_p*PI_p7)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f8(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m8)*A_m
+    dP = -np.conj(PI8)*A
+    dP_p = -np.conj(PI_p8)*A_p
+    
+    dA_m = (b_m*PI_m8)-i*(wbar + eps8/rho1)*A_m+((X0/2)*b*PI_m8)+((X0/2)*b_m*PI_m8)
+    dA = (b*PI8)-i*(wbar + eps8/rho1)*A+((X0/2)*b_p*PI8)+((X0/2)*b_m*PI8)
+    dA_p = (b_p*PI_p8)-i*(wbar + eps8/rho1)*A_p+((X0/2)*b*PI_p8)+((X0/2)*b_p*PI_p8)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f9(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m9)*A_m
+    dP = -np.conj(PI9)*A
+    dP_p = -np.conj(PI_p9)*A_p
+    
+    dA_m = (b_m*PI_m9)-i*(wbar + eps9/rho1)*A_m+((X0/2)*b*PI_m9)+((X0/2)*b_m*PI_m9)
+    dA = (b*PI9)-i*(wbar + eps9/rho1)*A+((X0/2)*b_p*PI9)+((X0/2)*b_m*PI9)
+    dA_p = (b_p*PI_p9)-i*(wbar + eps9/rho1)*A_p+((X0/2)*b*PI_p9)+((X0/2)*b_p*PI_p9)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+def f10(z,q):
+    
+    b_m,b,b_p,P_m,P,P_p,A_m,A,A_p = q
+    
+    db_m = -i*P_m
+    db = -i*P
+    db_p = -i*P_p
+    
+    dP_m = -np.conj(PI_m10)*A_m
+    dP = -np.conj(PI10)*A
+    dP_p = -np.conj(PI_p10)*A_p
+    
+    dA_m = (b_m*PI_m10)-i*(wbar + eps10/rho1)*A_m+((X0/2)*b*PI_m10)+((X0/2)*b_m*PI_m10)
+    dA = (b*PI10)-i*(wbar + eps10/rho1)*A+((X0/2)*b_p*PI10)+((X0/2)*b_m*PI_m10)
+    dA_p = (b_p*PI_p10)-i*(wbar + eps10/rho1)*A_p+((X0/2)*b*PI_p10)+((X0/2)*b_p*PI_p10)
+    
+    return[db_m,db,db_p,dP_m,dP,dP_p,dA_m,dA,dA_p]
+
+"Defines a complex value"
+i = 1J
+"Defining the inital slippage lengths and its resulting total constant slippage"
+l1 = 0.75
+delta1 = 8.75
+s = l1+delta1
+"Beam modulation value"
+X0 = 0.05
+"How many points to solve over"
+N = 200
+
+"Defining the length to solve over"
+z = l1
+
+
+"Frequency modes to solve at"
+deltaw = round(2*np.pi/s,3)
+"Main central freuqncy mode w"
+wbar = 0
+
+"FEL parameter"
+rho1 = 1.5e-3
+
+"Defines the modulation for each undulator-chicane module by tuning it to a specific frequency"
+eps1 = deltaw*rho1
+eps2 = -deltaw*rho1
+eps3 = deltaw*rho1
+eps4 = -deltaw*rho1
+eps5 = deltaw*rho1
+eps6 = -deltaw*rho1
+eps7 = deltaw*rho1
+eps8 = -deltaw*rho1
+eps9 = deltaw*rho1
+eps10= -deltaw*rho1
+
+
+"number of chicanes traversed"
+m1 = 0
+m2 = 1
+m3 = 2
+m4 = 3
+m5 = 4
+m6 = 5
+m7 = 6
+m8 = 7
+m9 = 8
+m10 = 9
+
+"Scaled Slippage lengths"
+l2 = l1+(2/3)*eps2*l1
+delta2 = delta1-(2/3)*eps2*l1
+s2 = l2+delta2
+
+l3 = l1+(2/3)*eps3*l1
+delta3 = delta1-(2/3)*eps3*l1
+s3 = l3+delta3
+
+l4 = l1+(2/3)*eps4*l1
+delta4 = delta1-(2/3)*eps4*l1
+s4 = l4+delta4
+
+l5 = l1+(2/3)*eps5*l1
+delta5 = delta1-(2/3)*eps5*l1
+s5 = l5+delta5
+
+l6 = l1+(2/3)*eps6*l1
+delta6 = delta1-(2/3)*eps6*l1
+s6 = l6+delta6
+
+l7 = l1+(2/3)*eps7*l1
+delta7 = delta1-(2/3)*eps7*l1
+s7 = l7+delta7
+
+l8 = l1+(2/3)*eps8*l1
+delta8 = delta1-(2/3)*eps8*l1
+s8 = l8+delta8
+
+l9 = l1+(2/3)*eps9*l1
+delta9 = delta1-(2/3)*eps9*l1
+s9 = l9+delta9
+
+l10 = l1+(2/3)*eps10*l1
+delta10 = delta1-(2/3)*eps10*l1
+s10 = l10+delta10
+
+"Lengths equations will be solved over for each module. All set to z but can be changed"
+z1 = np.linspace(0,z,N)
+z2 = np.linspace(0,z,N)
+z3 = np.linspace(0,z,N)
+z4 = np.linspace(0,z,N)
+z5 = np.linspace(0,z,N)
+z6 = np.linspace(0,z,N)
+z7 = np.linspace(0,z,N)
+z8 = np.linspace(0,z,N)
+z9 = np.linspace(0,z,N)
+z10 = np.linspace(0,z,N)
+
+"chicane slippage functions for each mode"
+"For 1st module"
+PI1 = np.exp(i*m1*wbar*(delta1))
+PI_m1 = PI1*np.exp(-i*m1*deltaw*(delta1))
+PI_p1 = PI1*np.exp(i*m1*deltaw*(delta1))
+"For 2nd module"
+PI2 = np.exp(i*m2*wbar*(delta2))
+PI_m2 = PI2*np.exp(-i*m2*deltaw*(delta2))
+PI_p2 = PI2*np.exp(i*m2*deltaw*(delta2))
+"For 3rd module"
+PI3 = np.exp(i*m3*wbar*(delta3))
+PI_m3 = PI3*np.exp(-i*m3*deltaw*(delta3))
+PI_p3 = PI3*np.exp(i*m3*deltaw*(delta3))
+"For 4th module"
+PI4 = np.exp(i*m4*wbar*(delta4))
+PI_m4 = PI4*np.exp(-i*m4*deltaw*(delta4))
+PI_p4 = PI4*np.exp(i*m4*deltaw*(delta4))
+"For 5th module"
+PI5 = np.exp(i*m5*wbar*(delta5))
+PI_m5 = PI5*np.exp(-i*m5*deltaw*(delta5))
+PI_p5 = PI5*np.exp(i*m5*deltaw*(delta5))
+"For 6th module"
+PI6 = np.exp(i*m6*wbar*(delta6))
+PI_m6 = PI6*np.exp(-i*m6*deltaw*(delta6))
+PI_p6 = PI6*np.exp(i*m6*deltaw*(delta6))
+"For 7th module"
+PI7 = np.exp(i*m7*wbar*(delta7))
+PI_m7 = PI7*np.exp(-i*m7*deltaw*(delta7))
+PI_p7 = PI7*np.exp(i*m7*deltaw*(delta7))
+"For 8th module"
+PI8 = np.exp(i*m8*wbar*(delta8))
+PI_m8 = PI8*np.exp(-i*m8*deltaw*(delta8))
+PI_p8 = PI8*np.exp(i*m8*deltaw*(delta8))
+"For 9th module"
+PI9 = np.exp(i*m9*wbar*(delta9))
+PI_m9 = PI9*np.exp(-i*m9*deltaw*(delta9))
+PI_p9 = PI9*np.exp(i*m9*deltaw*(delta9))
+"For 10th module"
+PI10 = np.exp(i*m10*wbar*(delta10))
+PI_m10 = PI10*np.exp(-i*m10*deltaw*(delta10))
+PI_p10 = PI10*np.exp(i*m10*deltaw*(delta10))
+
+
+"Initial conditions"
+b0 = 0
+P0 = 0
+A0 = 1e-3
+
+"Initial Conditions as an array of 9"
+init1 = np.array([b0,b0,b0,P0,P0,P0,A0,A0,A0], dtype=np.complex128)
+"Solver using RK45 method"
+sol1d = sc.solve_ivp(f1, z1, init1, method = 'RK45', dense_output=True)
+"Creates the solution array size of (Nx9)"
+sol1 = sol1d.sol(z1).T
+
+"Takes final solution from previous module and uses that as initial conditions for next module"
+init2 = np.array([sol1[(N-1),0],sol1[(N-1),1],sol1[(N-1),2],sol1[(N-1),3],sol1[(N-1),4],sol1[(N-1),5],sol1[(N-1),6],sol1[(N-1),7],sol1[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol2d = sc.solve_ivp(f2, z2, init2, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol2 = sol2d.sol(z2).T
+
+init3 = np.array([sol2[(N-1),0],sol2[(N-1),1],sol2[(N-1),2],sol2[(N-1),3],sol2[(N-1),4],sol2[(N-1),5],sol2[(N-1),6],sol2[(N-1),7],sol2[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol3d = sc.solve_ivp(f3, z3, init3, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol3 = sol3d.sol(z3).T
+
+init4 = np.array([sol3[(N-1),0],sol3[(N-1),1],sol3[(N-1),2],sol3[(N-1),3],sol3[(N-1),4],sol3[(N-1),5],sol3[(N-1),6],sol3[(N-1),7],sol3[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol4d = sc.solve_ivp(f4, z4, init4, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol4 = sol4d.sol(z4).T
+
+init5 = np.array([sol4[(N-1),0],sol4[(N-1),1],sol4[(N-1),2],sol4[(N-1),3],sol4[(N-1),4],sol4[(N-1),5],sol4[(N-1),6],sol4[(N-1),7],sol4[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol5d = sc.solve_ivp(f5, z5, init5, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol5 = sol5d.sol(z5).T
+
+init6 = np.array([sol5[(N-1),0],sol5[(N-1),1],sol5[(N-1),2],sol5[(N-1),3],sol5[(N-1),4],sol5[(N-1),5],sol5[(N-1),6],sol5[(N-1),7],sol5[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol6d = sc.solve_ivp(f6, z6, init6, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol6 = sol6d.sol(z6).T
+
+init7 = np.array([sol6[(N-1),0],sol6[(N-1),1],sol6[(N-1),2],sol6[(N-1),3],sol6[(N-1),4],sol6[(N-1),5],sol6[(N-1),6],sol6[(N-1),7],sol6[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol7d = sc.solve_ivp(f7, z7, init7, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol7 = sol7d.sol(z7).T
+
+init8 = np.array([sol7[(N-1),0],sol7[(N-1),1],sol7[(N-1),2],sol7[(N-1),3],sol7[(N-1),4],sol7[(N-1),5],sol7[(N-1),6],sol7[(N-1),7],sol7[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol8d = sc.solve_ivp(f8, z8, init8, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol8 = sol8d.sol(z8).T
+
+init9 = np.array([sol8[(N-1),0],sol8[(N-1),1],sol8[(N-1),2],sol8[(N-1),3],sol8[(N-1),4],sol8[(N-1),5],sol8[(N-1),6],sol8[(N-1),7],sol8[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol9d = sc.solve_ivp(f9, z9, init9, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol9 = sol9d.sol(z9).T
+
+init10 = np.array([sol9[(N-1),0],sol9[(N-1),1],sol9[(N-1),2],sol9[(N-1),3],sol9[(N-1),4],sol9[(N-1),5],sol9[(N-1),6],sol9[(N-1),7],sol9[(N-1),8]], dtype=np.complex128)
+"Solver"
+sol10d = sc.solve_ivp(f10, z10, init10, method = 'RK45', dense_output=True)
+"Creates the solution"
+sol10 = sol10d.sol(z10).T
+
+
+"Takes all the solutions for each equation and combines them into one array"
+b_mcom = np.concatenate((sol1[:,0],sol2[:,0],sol3[:,0],sol4[:,0],sol5[:,0],sol6[:,0],sol7[:,0],sol8[:,0],sol9[:,0],sol10[:,0]))
+bcom = np.concatenate((sol1[:,1],sol2[:,1],sol3[:,1],sol4[:,1],sol5[:,1],sol6[:,1],sol7[:,1],sol8[:,1],sol9[:,1],sol10[:,1]))
+b_pcom = np.concatenate((sol1[:,2],sol2[:,2],sol3[:,2],sol4[:,2],sol5[:,2],sol6[:,2],sol7[:,2],sol8[:,2],sol9[:,2],sol10[:,2]))
+P_mcom = np.concatenate((sol1[:,3],sol2[:,3],sol3[:,3],sol4[:,3],sol5[:,3],sol6[:,3],sol7[:,3],sol8[:,3],sol9[:,3],sol10[:,3]))
+Pcom = np.concatenate((sol1[:,4],sol2[:,4],sol3[:,4],sol4[:,4],sol5[:,4],sol6[:,4],sol7[:,4],sol8[:,4],sol9[:,4],sol10[:,4]))
+P_pcom = np.concatenate((sol1[:,5],sol2[:,5],sol3[:,5],sol4[:,5],sol5[:,5],sol6[:,5],sol7[:,5],sol8[:,5],sol9[:,5],sol10[:,5]))
+A_mcom = np.concatenate((sol1[:,6],sol2[:,6],sol3[:,6],sol4[:,6],sol5[:,6],sol6[:,6],sol7[:,6],sol8[:,6],sol9[:,6],sol10[:,6]))
+Acom = np.concatenate((sol1[:,7],sol2[:,7],sol3[:,7],sol4[:,7],sol5[:,7],sol6[:,7],sol7[:,7],sol8[:,7],sol9[:,7],sol10[:,7]))
+A_pcom = np.concatenate((sol1[:,8],sol2[:,8],sol3[:,8],sol4[:,8],sol5[:,8],sol6[:,8],sol7[:,8],sol8[:,8],sol9[:,8],sol10[:,8]))
+
+"Takes the magnatitue of the full combined solutions array"
+b10_m = np.abs(b_mcom)
+b10 = np.abs(bcom)
+b10_p = np.abs(b_pcom)
+P10_m = np.abs(P_mcom)
+P10 = np.abs(Pcom)
+P10_p = np.abs(P_pcom)
+A10_m = np.abs(A_mcom)
+A10 = np.abs(Acom)
+A10_p = np.abs(A_pcom)
+
+"Combines the modes to one solution"
+A1Modes = A10_m+A10+A10_p
+
+"Creates array of total z of all undulator-chicane modules"
+zz = np.linspace(0,(z*10),N*10)
+
+"Options to plot b and P solutions below"
+"""
+plt.figure(1)
+plt.plot(zz,b10_m)
+plt.figure(1)
+plt.plot(zz,b10)
+plt.figure(1)
+plt.plot(zz,b10_p)
+plt.legend(['b-','b','b+'], shadow=True)
+plt.title('Solutions for b with deltaw='+str(deltaw))
+plt.xlabel('Total 'r'$\bar{z}$')
+plt.figure(2)
+plt.plot(zz,P10_m)
+plt.figure(2)
+plt.plot(zz,P10)
+plt.figure(2)
+plt.plot(zz,P10_p)
+plt.legend(['P-','P','P+'], shadow=True)
+plt.title('Solutions for P with deltaw='+str(deltaw))
+plt.xlabel('Total 'r'$\bar{z}$')
+
+"""
+"Plots the modes individually as a function of total z"
+plt.figure(4)
+plt.plot(zz,A10_m)
+plt.figure(4)
+plt.plot(zz,A10)
+plt.figure(4)
+plt.plot(zz,A10_p)
+plt.legend(['A-','A','A+'], shadow=True)
+plt.title('Solutions for A with 'r'$\Delta\bar{\omega}$='+str(deltaw)+'& total slippage of: '+str(s))
+plt.xlabel('Total 'r'$\bar{z}$')
+plt.ylabel(''r'$|\tilde{A}|$(arb. units)')
+
+"Plots a semilog plot. Each mode has the log took and then plotted as a function of total z"
+plt.figure(5)
+plt.semilogy(zz,A10_m)
+plt.figure(5)
+plt.semilogy(zz,A10)
+plt.figure(5)
+plt.semilogy(zz,A10_p)
+plt.legend(['A-','A','A+'], shadow=True)
+plt.title('Solutions for A with 'r'$\Delta\bar{\omega}$='+str(deltaw)+'& total slippage of: '+str(s))
+plt.xlabel('Total 'r'$\bar{z}$')
+plt.ylabel(''r'$log(|\tilde{A}|)$(arb. units)')
+
+"Option to Plot combined A field Solutions"
+"""
+plt.figure(6)
+plt.plot(zz,A1Modes)
+plt.title('Solutions for A with 'r'$\Delta\bar{\omega}$='+str(deltaw)+'& total slippage of: '+str(s))
+plt.xlabel('Total 'r'$\bar{z}$')
+plt.ylabel(''r'$|\tilde{A}|$(arb. units)')
+"""
